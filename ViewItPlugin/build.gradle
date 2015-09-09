@@ -1,0 +1,26 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.0'
+    }
+}
+
+apply plugin: 'com.github.johnrengelman.shadow'
+
+dependencies {
+    compile 'com.sk89q.intake:intake:4.0-SNAPSHOT'
+    compile fileTree(dir: rootProject.file('libs'), include: '*.jar')
+}
+
+shadowJar {
+    classifier = 'dist'
+    dependencies {
+        include(dependency('com.sk89q.intake:intake:4.0-SNAPSHOT'))
+    }
+    exclude 'PlaceholderAPI*'
+}
+
+build.dependsOn(shadowJar)

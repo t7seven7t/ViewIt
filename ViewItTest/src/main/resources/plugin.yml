@@ -1,0 +1,7 @@
+name: ViewItTest
+version: "${version}"
+main: net.t7seven7t.viewittest.ViewItTest
+author: t7seven7t
+depend: [ViewIt]
+commands:
+  vtest:

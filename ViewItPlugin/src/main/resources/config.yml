@@ -1,0 +1,25 @@
+# Whether to automatically take over a player's scoreboard when they join the server
+track-players-on-join: true
+
+# The number of ticks between scoreboard updates.
+# Try increasing this if you have performance concerns
+# Plugin requires a full reload or server restart for changes to this to take effect
+scoreboard-tick-interval: 1
+
+# List of default elements that will be displayed on the scoreboard for every player.
+# Remove this section if you don't want any to be shown by this plugin.
+# For a full list of placeholders you can use in text see TODO: add link to wiki
+scoreboard-elements:
+  server title:
+    priority: -10
+    text: ["&7Server is using &3&lViewIt!", "&7Server is using &9&lViewIt!"]
+    delay: 40
+  player welcome:
+    priority: 5
+    text: "&7Welcome &a&o%name%!"
+  player ping:
+    priority: 10
+    text:
+      line1: "&6Ping:"
+      line2: "%ping%"
+    delay: 40
