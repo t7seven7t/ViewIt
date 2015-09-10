@@ -11,6 +11,9 @@ commands:
     description: Change your scoreboard settings
     permission: viewit.scoreboard
 permissions:
-  viewit.scoreboard:
-    description: Allows users to change their scoreboard settings
+  viewit.scoreboard.toggle:
+    description: Allows users to toggle their scoreboard on/off
     default: true
+  viewit.scoreboard.reload:
+    description: Allows users to reload the scoreboard elements from config using /scoreboard reload
+    default: op
