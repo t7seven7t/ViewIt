@@ -9,7 +9,7 @@ ViewIt can be used like any other Spigot plugin by adding it to the plugins dire
 Developers should note that ViewIt is licensed under the Apache License v2 and that they can copy the source from this plugin as long as they retain the original license for the copied code and specify any changes they made. 
 
 ## Documentation
-stub
+Most of the interfaces are already documented with some classes receiving documentation too. More information on how to use the API can be found on the [wiki](https://github.com/t7seven7t/ViewIt/wiki).
 
 ## Downloading
 You can find the latest release of ViewIt along with a list of changes on the [releases page](https://github.com/t7seven7t/ViewIt/releases). To install just place the jar into your plugins folder.
