@@ -11,6 +11,8 @@ Developers should note that ViewIt is licensed under the Apache License v2 and t
 ## Documentation
 Most of the interfaces are already documented with some classes receiving documentation too. More information on how to use the API can be found on the [wiki](https://github.com/t7seven7t/ViewIt/wiki).
 
+Additionally you can have a look at the provided example `ViewItTest` that contains some simple command test cases for modifying the scoreboard.
+
 ## Downloading
 You can find the latest release of ViewIt along with a list of changes on the [releases page](https://github.com/t7seven7t/ViewIt/releases). To install just place the jar into your plugins folder.
 
