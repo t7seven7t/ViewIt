@@ -104,6 +104,16 @@ public class ViewItPlugin extends JavaPlugin {
         replacers.reset();
     }
 
+    public void reloadConfigElements() {
+        ScoreboardElement[] elements = configElements.getElementsMap().values()
+                .toArray(new ScoreboardElement[configElements.getElementsMap().size()]);
+        Bukkit.getOnlinePlayers()
+                .forEach(player -> scoreboardService.removeElements(player, elements));
+        reloadConfig();
+        configElements.loadFromConfiguration(getConfig());
+        Bukkit.getOnlinePlayers().forEach(configElements::addAllToPlayer);
+    }
+
     /**
      * Creates a ScoreboardElement using the default implementation. For more options see {@link
      * ScoreboardElement}

@@ -1,6 +1,6 @@
 subprojects {
     group 'net.t7seven7t'
-    version '2'
+    version '3'
 
     apply plugin: 'java'
     apply plugin: 'eclipse'

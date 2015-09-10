@@ -16,7 +16,10 @@ package net.t7seven7t.viewit.command.module;
 import com.sk89q.intake.parametric.AbstractModule;
 
 import net.t7seven7t.viewit.ViewItPlugin;
+import net.t7seven7t.viewit.command.module.provider.CommandSenderProvider;
 import net.t7seven7t.viewit.scoreboard.ScoreboardService;
+
+import org.bukkit.command.CommandSender;
 
 /**
  *
@@ -26,5 +29,6 @@ public class ViewModule extends AbstractModule {
     protected void configure() {
         bind(ScoreboardService.class).toInstance(ScoreboardService.getInstance());
         bind(ViewItPlugin.class).toInstance(ViewItPlugin.getInstance());
+        bind(CommandSender.class).toProvider(new CommandSenderProvider());
     }
 }

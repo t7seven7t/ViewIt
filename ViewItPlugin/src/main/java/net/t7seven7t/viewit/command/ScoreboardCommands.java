@@ -17,16 +17,18 @@ import com.sk89q.intake.Command;
 import com.sk89q.intake.Require;
 import com.sk89q.intake.parametric.annotation.Optional;
 
+import net.t7seven7t.viewit.ViewItPlugin;
 import net.t7seven7t.viewit.command.annotation.Sender;
 import net.t7seven7t.viewit.scoreboard.ScoreboardService;
 
 import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 /**
  *
  */
-class ScoreboardCommands {
+public class ScoreboardCommands {
 
     @Command(
             aliases = {"toggle"},
@@ -46,6 +48,17 @@ class ScoreboardCommands {
         scoreboardService.setVisibility(player, visible);
         player.sendMessage(
                 ChatColor.GOLD + "Your scoreboard will now be " + (visible ? "shown" : "hidden"));
+    }
+
+    @Command(
+            aliases = ("reload"),
+            desc = "Reloads all scoreboard elements from the config"
+    )
+    @Require("viewit.scoreboard.reload")
+    public void reload(ViewItPlugin plugin, CommandSender sender) {
+        plugin.reloadConfigElements();
+        sender.sendMessage(
+                ChatColor.GOLD + "Scoreboard elements have been reloaded from the config.");
     }
 
 }

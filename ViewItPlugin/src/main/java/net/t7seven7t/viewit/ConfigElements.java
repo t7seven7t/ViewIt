@@ -14,6 +14,7 @@
 package net.t7seven7t.viewit;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.MapMaker;
 import com.google.common.collect.Maps;
 
 import net.t7seven7t.viewit.scoreboard.ScoreboardElement;
@@ -45,7 +46,7 @@ public class ConfigElements implements Listener {
     private final Plugin plugin;
 
     public ConfigElements(Plugin plugin) {
-        this.elementsMap = Maps.newHashMap();
+        this.elementsMap = new MapMaker().makeMap();
         this.plugin = plugin;
         loadFromConfiguration(plugin.getConfig());
         Bukkit.getPluginManager().registerEvents(this, plugin);
@@ -59,12 +60,17 @@ public class ConfigElements implements Listener {
         }
     }
 
+    public Map<String, ScoreboardElement> getElementsMap() {
+        return elementsMap;
+    }
+
     public void addAllToPlayer(Player player) {
         ScoreboardService.getInstance().addElements(player,
                 elementsMap.values().toArray(new ScoreboardElement[elementsMap.size()]));
     }
 
     public void loadFromConfiguration(Configuration config) {
+        elementsMap.clear();
         if (!config.isConfigurationSection("scoreboard-elements")) {
             return;
         }
