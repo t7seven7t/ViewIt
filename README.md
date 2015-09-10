@@ -1,8 +1,18 @@
 # ViewIt
 A resource for displaying information on Bukkit servers. ViewIt is intended to make it easier for Spigot developers to manage scoreboards and other visual elements commonly used in the Minecraft client.
 
+**NOTICE:** ViewIt requires that your server runs **Java 8 or it will not function**. Issues and pull requests regarding Java compatibility will be ignored.
+
+## Usage
+ViewIt can be used like any other Spigot plugin by adding it to the plugins directory. Server owners will find that the options provided by the plugin are relatively limited as it is designed to be used by developers to enhance interoperability between scoreboard plugins.
+
+Developers should note that ViewIt is licensed under the Apache License v2 and that they can copy the source from this plugin as long as they retain the original license for the copied code and specify any changes they made. 
+
 ## Documentation
 stub
+
+## Downloading
+You can find the latest release of ViewIt along with a list of changes on the [releases page](https://github.com/t7seven7t/ViewIt/releases). To install just place the jar into your plugins folder.
 
 ## Compiling
 Use Gradle to compile ViewIt
