@@ -192,7 +192,9 @@ class SimpleScoreboardService implements ScoreboardService {
         }
 
         // Apply part 1 end color to beginning of part 2
-        part2 = ChatColor.getLastColors(part1) + part2;
+        String lastColors = ChatColor.getLastColors(part1);
+        if (lastColors.isEmpty()) lastColors = ChatColor.WHITE.toString();
+        part2 = lastColors + part2;
         part2 = part2.substring(0, Math.min(part2.length(), 16));
 
         return Lists.newArrayList(part1, part2);
