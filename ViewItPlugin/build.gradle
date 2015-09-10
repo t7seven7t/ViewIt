@@ -16,11 +16,16 @@ dependencies {
 }
 
 shadowJar {
-    classifier = 'dist'
+    baseName = 'ViewIt'
+    classifier = ''
     dependencies {
         include(dependency('com.sk89q.intake:intake:4.0-SNAPSHOT'))
     }
     exclude 'PlaceholderAPI*'
+    from(rootDir) {
+        include 'LICENSE'
+        include 'NOTICE'
+    }
 }
 
 build.dependsOn(shadowJar)
