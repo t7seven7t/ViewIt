@@ -2,7 +2,7 @@ name: ViewIt
 version: "${version}"
 main: net.t7seven7t.viewit.ViewItPlugin
 author: t7seven7t
-soft-depend: [PlaceholderAPI]
+softdepend: [PlaceholderAPI]
 description: >
              An API designed to make it easier for developers to display content to their audience.
 commands:
