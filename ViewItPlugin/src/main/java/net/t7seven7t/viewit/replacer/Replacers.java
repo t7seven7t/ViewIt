@@ -80,7 +80,15 @@ public class Replacers {
             if (m.find()) {
                 Optional<String> replaceResult = Optional.ofNullable(replaceResults.get(replacer));
                 if (!replaceResult.isPresent()) {
-                    replaceResult = Optional.of(replacer.getResult(target, recipient));
+                    try {
+                        replaceResult = Optional.ofNullable(replacer.getResult(target, recipient));
+                    } catch (NullPointerException e) {
+                        continue;
+                    }
+                    if (!replaceResult.isPresent()) {
+                        continue;
+                    }
+
                     replaceResults.put(replacer, replaceResult.get());
                 }
                 message = m.replaceAll(replaceResult.get());
