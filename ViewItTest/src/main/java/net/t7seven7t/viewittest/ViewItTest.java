@@ -25,6 +25,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import net.t7seven7t.viewit.scoreboard.ScoreboardElement;
+import static net.t7seven7t.viewit.scoreboard.ScoreboardElement.Priority.*;
 import net.t7seven7t.viewit.scoreboard.ScoreboardService;
 import net.t7seven7t.viewit.supply.FrameSupply;
 import net.t7seven7t.viewit.supply.Supply;
@@ -64,25 +65,25 @@ public class ViewItTest extends JavaPlugin {
     @Override
     public void onEnable() {
         elements.put("TITLE1", ScoreboardElement
-                .of(this, -1, 20L, Supply.of("&4Boring ol' title", "&2Boring ol' title")));
+                .of(this, NORMAL(0).title(), 20L, Supply.of("&4Boring ol' title", "&2Boring ol' title")));
         elements.put("TITLE2",
-                ScoreboardElement.of(this, -5, 60L, Supply.of("&3Weeeeee", "&5Weeeeee")));
+                ScoreboardElement.of(this, HIGH(0).title(), 60L, Supply.of("&3Weeeeee", "&5Weeeeee")));
         elements.put("E1", ScoreboardElement
-                .of(this, 10, Supply.of("&6E1: Line 1"), Supply.of("&3E1: Line 2")));
-        elements.put("E2", ScoreboardElement.of(this, 20,
+                .of(this, HIGH(0), Supply.of("&6E1: Line 1"), Supply.of("&3E1: Line 2")));
+        elements.put("E2", ScoreboardElement.of(this, HIGH(10),
                 Supply.of("&9Really long line like this ya know yeahhhh")));
         elements.put("E3", ScoreboardElement
-                .of(this, 30, Supply.of("abc"), Supply.of("def"), Supply.of("ghi"),
+                .of(this, HIGH(20), Supply.of("abc"), Supply.of("def"), Supply.of("ghi"),
                         Supply.of("jkl")));
-        elements.put("SPACER", ScoreboardElement.of(this, 35, Long.MAX_VALUE, Supply.of("")));
+        elements.put("SPACER", ScoreboardElement.of(this, HIGH(30), Long.MAX_VALUE, Supply.of("")));
         elements.put("E4",
-                ScoreboardElement.of(this, 40, Supply.of("&bMoney:"), p -> "&e$" + money));
+                ScoreboardElement.of(this, HIGH(40), Supply.of("&bMoney:"), p -> "&e$" + money));
         elements.put("E5", ScoreboardElement
-                .of(this, 50, 20L, IntStream.range(1, 10).mapToObj(this::supp).collect(
+                .of(this, HIGH(50), 20L, IntStream.range(1, 10).mapToObj(this::supp).collect(
                         Collectors.toList())));
         elements.put("E6", ScoreboardElement
-                .of(this, 60, 15L, Supply.of(rand("%name%"), rand("%name%"), rand("%name%"))));
-        elements.put("E7", ScoreboardElement.of(this, 55, 30L, Supply.of("%ping%")));
+                .of(this, HIGH(60), 15L, Supply.of(rand("%name%"), rand("%name%"), rand("%name%"))));
+        elements.put("E7", ScoreboardElement.of(this, HIGH(55), 30L, Supply.of("%ping%")));
     }
 
     @Override

@@ -43,6 +43,19 @@ public interface ScoreboardElement {
     }
 
     /**
+     * Returns a ScoreboardElement of the specified frames.
+     *
+     * @param plugin      Plugin that plans to register the element
+     * @param priority    Priority for where to display this element.
+     * @param updateDelay Delay in ticks between animation updates
+     * @param contents    Frames to display
+     */
+    static ScoreboardElement of(Plugin plugin, Priority priority, long updateDelay,
+                                List<FrameSupply> contents) {
+        return of(plugin, priority.intValue(), updateDelay, contents);
+    }
+
+    /**
      * Returns a ScoreboardElement of the specified frames
      *
      * @param plugin      Plugin that plants to register the element
@@ -52,6 +65,19 @@ public interface ScoreboardElement {
      * @see ScoreboardElement#of(Plugin, int, long, List) for more documentation of priorities
      */
     static ScoreboardElement of(Plugin plugin, int priority, long updateDelay,
+                                FrameSupply... contents) {
+        return of(plugin, priority, updateDelay, Arrays.asList(contents));
+    }
+
+    /**
+     * Returns a ScoreboardElement of the specified frames.
+     *
+     * @param plugin      Plugin that plans to register the element
+     * @param priority    Priority for where to display this element.
+     * @param updateDelay Delay in ticks between animation updates
+     * @param contents    Frames to display
+     */
+    static ScoreboardElement of(Plugin plugin, Priority priority, long updateDelay,
                                 FrameSupply... contents) {
         return of(plugin, priority, updateDelay, Arrays.asList(contents));
     }
@@ -76,8 +102,32 @@ public interface ScoreboardElement {
      * @param contents Frames to display
      * @see ScoreboardElement#of(Plugin, int, long, List) for more documentation of priorities
      */
+    static ScoreboardElement of(Plugin plugin, Priority priority, FrameSupply... contents) {
+        return of(plugin, priority, Arrays.asList(contents));
+    }
+
+    /**
+     * Returns a ScoreboardElement of the specified frames that defaults to updating every second.
+     *
+     * @param plugin   Plugin that plants to register the element
+     * @param priority Priority for where to display this element
+     * @param contents Frames to display
+     * @see ScoreboardElement#of(Plugin, int, long, List) for more documentation of priorities
+     */
     static ScoreboardElement of(Plugin plugin, int priority, List<FrameSupply> contents) {
         return of(plugin, priority, 20L, contents);
+    }
+
+    /**
+     * Returns a ScoreboardElement of the specified frames that defaults to updating every second.
+     *
+     * @param plugin   Plugin that plants to register the element
+     * @param priority Priority for where to display this element
+     * @param contents Frames to display
+     * @see ScoreboardElement#of(Plugin, int, long, List) for more documentation of priorities
+     */
+    static ScoreboardElement of(Plugin plugin, Priority priority, List<FrameSupply> contents) {
+        return of(plugin, priority.intValue(), 20L, contents);
     }
 
     /**
@@ -103,8 +153,8 @@ public interface ScoreboardElement {
     /**
      * <p>Inserts a line into this element</p>
      *
-     * <p>If the index is &gt;= getSize() then the line will be appended to the end.</p> <p>If supply
-     * is null then the line will be removed.</p>
+     * <p>If the index is &gt;= getSize() then the line will be appended to the end.</p> <p>If
+     * supply is null then the line will be removed.</p>
      *
      * @param index  index to insert at
      * @param supply provider of textual goodness
@@ -128,6 +178,13 @@ public interface ScoreboardElement {
     void setPriority(int priority);
 
     /**
+     * Sets the priority to the specified priority and recalculates its order in the scoreboard
+     */
+    default void setPriority(Priority priority) {
+        setPriority(priority.intValue());
+    }
+
+    /**
      * Gets the last time this in millis since UNIX time (Jan 1st 1970) that this element updated
      * its contents
      */
@@ -137,4 +194,57 @@ public interface ScoreboardElement {
      * Gets the plugin that created this element
      */
     Plugin getPlugin();
+
+    /**
+     * A priority to display a ScoreboardElement at.
+     */
+    class Priority {
+        private static final int LOWEST = 0;
+        private static final int LOW = 100;
+        private static final int NORMAL = 200;
+        private static final int HIGH = 300;
+        private static final int HIGHEST = 400;
+        private final int priority;
+
+        private Priority(int priority) {
+            this.priority = priority;
+        }
+
+        public static Priority LOWEST(int subPriority) {
+            return new Priority(LOWEST + subPriority);
+        }
+
+        public static Priority LOW(int subPriority) {
+            return new Priority(LOW + subPriority);
+        }
+
+        public static Priority NORMAL(int subPriority) {
+            return new Priority(NORMAL + subPriority);
+        }
+
+        public static Priority HIGH(int subPriority) {
+            return new Priority(HIGH + subPriority);
+        }
+
+        public static Priority HIGHEST(int subPriority) {
+            return new Priority(HIGHEST + subPriority);
+        }
+
+        private static void checkSubPriority(int value) {
+            if (value >= 100) {
+                throw new IllegalArgumentException("Cannot have a subPriority > 100");
+            }
+        }
+
+        public int intValue() {
+            return priority;
+        }
+
+        /**
+         * Converts the priority to title priority ordering
+         */
+        public Priority title() {
+            return priority == 0 ? new Priority(-1) : new Priority(Math.abs(priority) * -1);
+        }
+    }
 }
