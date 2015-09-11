@@ -127,6 +127,11 @@ public interface ScoreboardService {
     boolean isVisible(Player player);
 
     /**
+     * Gets whether the player is being tracked by the service
+     */
+    boolean hasPlayer(Player player);
+
+    /**
      * Sets whether the scoreboard is visible to the player. Has no effect if the player hasn't been
      * added yet.
      */

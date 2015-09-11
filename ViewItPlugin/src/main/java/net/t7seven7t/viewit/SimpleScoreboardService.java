@@ -231,6 +231,10 @@ class SimpleScoreboardService implements ScoreboardService {
      */
     @Override
     public void addPlayer(Player player) {
+        if (hasPlayer(player)) {
+            return;
+        }
+
         Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
         player.setScoreboard(board);
         elementsMap.put(player, new CopyOnWriteArrayList<>());
@@ -282,7 +286,15 @@ class SimpleScoreboardService implements ScoreboardService {
      */
     @Override
     public boolean isVisible(Player player) {
-        return !invisibleTo.contains(player);
+        return hasPlayer(player) && !invisibleTo.contains(player);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean hasPlayer(Player player) {
+        return elementsMap.containsKey(player);
     }
 
     /**
